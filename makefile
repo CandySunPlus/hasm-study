@@ -1,12 +1,9 @@
-DIR =bin
+DIR = bin
 
-$(DIR):
-	make -p $@
-
-%: %.o 
-	@mkdir -p $(DIR)
+%: $(DIR)/%.o 
 	$(LD) -o $(DIR)/$@ $< 
 
-%.o: %.asm 
+$(DIR)/%.o: %.asm 
+	@mkdir -p $(DIR)
 	yasm -g dwarf2 -f elf -o $@ $<
 
